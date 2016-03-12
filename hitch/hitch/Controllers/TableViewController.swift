@@ -35,7 +35,9 @@ class TableViewController: UITableViewController {
     }
     
     func newRide() {
-        print("button pressed")
+        let viewController = NewRideViewController()
+        let navController = NavigationController(rootViewController: viewController)
+        self.presentViewController(navController, animated: true, completion: nil)
     }
     
     func requestForRides() {
