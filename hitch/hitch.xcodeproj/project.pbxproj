@@ -10,6 +10,7 @@
 		D309BEB61C94AA88004AC853 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309BEB51C94AA88004AC853 /* AppDelegate.swift */; };
 		D309BEBD1C94AA88004AC853 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D309BEBC1C94AA88004AC853 /* Assets.xcassets */; };
 		D309BEC01C94AA88004AC853 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D309BEBE1C94AA88004AC853 /* LaunchScreen.storyboard */; };
+		D309BEC81C94AB77004AC853 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309BEC71C94AB77004AC853 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +19,7 @@
 		D309BEBC1C94AA88004AC853 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D309BEBF1C94AA88004AC853 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D309BEC11C94AA88004AC853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D309BEC71C94AB77004AC853 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = Controllers/TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				D309BEB51C94AA88004AC853 /* AppDelegate.swift */,
+				D309BEC71C94AB77004AC853 /* TableViewController.swift */,
 				D309BEBC1C94AA88004AC853 /* Assets.xcassets */,
 				D309BEBE1C94AA88004AC853 /* LaunchScreen.storyboard */,
 				D309BEC11C94AA88004AC853 /* Info.plist */,
@@ -129,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D309BEB61C94AA88004AC853 /* AppDelegate.swift in Sources */,
+				D309BEC81C94AB77004AC853 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
