@@ -20,4 +20,8 @@ class NavigationController: UINavigationController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nil, bundle: nil)
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
