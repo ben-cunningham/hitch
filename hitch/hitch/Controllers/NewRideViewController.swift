@@ -99,7 +99,48 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
     }
     
     func add() {
+        let urlPath = "http://127.0.0.1:8000/ride"
+        let url = NSURL(string: urlPath)!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let postDic = self.getPOSTData()
+        do {
+            let data = try NSJSONSerialization.dataWithJSONObject(postDic, options: [])
+            request.HTTPBody = data
+        } catch {
+            fatalError("")
+        }
         
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            let json: AnyObject
+            do {
+                json =  try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                print(json)
+            } catch {
+                // Could not parse the JSON
+            }
+        }
+        
+        task.resume()
+
+    }
+    
+    func getPOSTData() -> Dictionary<String, AnyObject> {
+        var params = Dictionary<String, AnyObject>()
+        params["created_by"] = "1"
+        params["date"] = "2015-01-01"
+        params["departure"] = [
+            "place_id" : "123123",
+            "name" : "shorts bay"
+        ]
+        params["destination"] = [
+            "place_id" : "12312",
+            "name" : "asdf bay"
+        ]
+        params["time"] = "12:50:12"
+        return params
     }
     
     func cancel() {
