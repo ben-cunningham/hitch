@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewController: UITableViewController {
+class TableViewController: UITableViewController, LocalSearchResultsDelegate {
     var searchController: UISearchController
     var localSearchResults: LocalSearchResults
     
@@ -23,6 +23,8 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("newRide"))
+        
+        self.localSearchResults.delegate = self
         
         // search bar
         self.searchController.searchResultsUpdater = self.localSearchResults
@@ -55,7 +57,33 @@ class TableViewController: UITableViewController {
         self.presentViewController(navController, animated: true, completion: nil)
     }
     
-    func requestForRides() {
+    func requestForRidesWithPointOfInterest(poi: PointOfInterest) {
+        let text = searchController.searchBar.text
+        if text!.characters.count == 0 {
+            return
+        }
+        let urlPath = ""
+        let url = NSURL(string: urlPath)!
+        let request = NSMutableURLRequest(URL: url)
         
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            let json: AnyObject
+            do {
+                json =  try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                
+            } catch {
+                // Could not parse the JSON
+            }
+            self.tableView.performSelectorOnMainThread(Selector("reloadData"), withObject: nil, waitUntilDone: true)
+        }
+        
+        task.resume()
+    }
+    
+    // MARK: LocalSearchResultsDelegate
+    
+    func isDismissingWithResult(result: PointOfInterest) {
+        self.requestForRidesWithPointOfInterest(result)
     }
 }

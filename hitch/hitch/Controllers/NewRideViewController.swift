@@ -9,7 +9,15 @@
 import UIKit
 
 class NewRideViewController: UIViewController {
+    var departureField: UITextField
+    var destinationField: UITextField
+    var datePicker: UITextField
+    
     init() {
+        self.departureField = UITextField(frame: CGRectMake(0, 0, 150, 50))
+        self.destinationField = UITextField(frame: CGRectMake(0, 0, 150, 50))
+        self.datePicker = UITextField(frame: CGRectMake(0, 0, 150, 50))
+        
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -22,6 +30,11 @@ class NewRideViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "add")
         self.view = UIView(frame: UIScreen.mainScreen().bounds)
         self.view.backgroundColor = UIColor.whiteColor()
+        
+        self.view.addSubview(self.departureField)
+        self.view.addSubview(self.destinationField)
+        self.view.addSubview(self.datePicker)
+        
         super.viewDidLoad()
     }
     

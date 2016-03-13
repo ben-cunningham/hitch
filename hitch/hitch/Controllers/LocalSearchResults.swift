@@ -18,12 +18,15 @@ struct PointOfInterest {
     var name: String
     var street: String
     var city: String
+    var place_id: String
 }
 
 class LocalSearchResults: UITableViewController, CLLocationManagerDelegate {
     var locationManager: CLLocationManager
     var results: [PointOfInterest] = []
     var userLocation: Location
+    
+    weak var delegate: LocalSearchResultsDelegate?
     
     var isLoading: Bool = false
     
@@ -72,6 +75,9 @@ class LocalSearchResults: UITableViewController, CLLocationManagerDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        if let delegate = self.delegate {
+            delegate.isDismissingWithResult(self.results[indexPath.row])
+        }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
@@ -81,12 +87,13 @@ class LocalSearchResults: UITableViewController, CLLocationManagerDelegate {
     
     func pointOfInterestForPlace(place: NSDictionary) -> PointOfInterest {
         let name = place["description"] as! String
+        let place_id = place["place_id"] as! String
         let terms = place["terms"] as! NSArray
         let streetTerm = terms[1] as! NSDictionary
         let cityTerm = terms[2] as! NSDictionary
         let street = streetTerm["value"] as! String
         let city = cityTerm["value"] as! String
-        let poi = PointOfInterest(name: name, street: street, city: city)
+        let poi = PointOfInterest(name: name, street: street, city: city, place_id: place_id)
         return poi
     }
 }
@@ -131,4 +138,8 @@ extension LocalSearchResults: UISearchResultsUpdating {
         
         task.resume()
     }
+}
+
+protocol LocalSearchResultsDelegate: class {
+    func isDismissingWithResult(result: PointOfInterest)
 }
