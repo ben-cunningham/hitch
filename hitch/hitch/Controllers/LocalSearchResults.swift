@@ -75,7 +75,7 @@ class LocalSearchResults: UITableViewController, CLLocationManagerDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let delegate = self.delegate {
-            delegate.isDismissingWithResult(self.results[indexPath.row])
+            delegate.isDismissingWithResult(self, result: self.results[indexPath.row])
         }
     }
     
@@ -114,6 +114,8 @@ extension LocalSearchResults: UISearchResultsUpdating {
         urlPath += "&radius=500"
         urlPath += "&key=AIzaSyBf3UDAX7z7kbkRsKm7tn2I_6LxfvL85Og"
         
+        print(urlPath)
+        
         let url = NSURL(string: urlPath)!
         let request = NSMutableURLRequest(URL: url)
         
@@ -140,5 +142,5 @@ extension LocalSearchResults: UISearchResultsUpdating {
 }
 
 protocol LocalSearchResultsDelegate: class {
-    func isDismissingWithResult(result: PointOfInterest)
+    func isDismissingWithResult(searchResultsController: LocalSearchResults,result: PointOfInterest)
 }

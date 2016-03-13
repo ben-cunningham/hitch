@@ -14,8 +14,11 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
     var datePicker: UITextField
     var timePicker: UITextField
     
-    var destinationPlaceId: String = ""
-    var departurePlaceId: String = ""
+    var destination: PointOfInterest
+    var departure: PointOfInterest
+    
+    var dateString: String = ""
+    var timeString: String = ""
     
     init() {
         self.departureField = UITextField()
@@ -23,6 +26,9 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
         self.datePicker = UITextField()
         self.timePicker = UITextField()
         
+        self.destination = PointOfInterest(name: "", street: "", city: "", place_id: "")
+        self.departure = PointOfInterest(name: "", street: "", city: "", place_id: "")
+
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -32,9 +38,14 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
     
     override func viewDidLoad() {
         self.title = "Post a ride"
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 237.0/255, green: 247.0/255, blue: 119.0/255, alpha: 1)
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "add")
+        let leftButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel")
+        leftButton.tintColor = UIColor.blackColor()
+        self.navigationItem.leftBarButtonItem = leftButton
+        let rightButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "add")
+        rightButton.tintColor = UIColor.blackColor()
+        self.navigationItem.rightBarButtonItem = rightButton
         self.view = UIView(frame: UIScreen.mainScreen().bounds)
         self.view.backgroundColor = UIColor.init(red: 230.0/255, green: 230.0/255, blue: 230.0/255, alpha: 1)
         
@@ -90,16 +101,24 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
         let timeFormatter = NSDateFormatter()
         timeFormatter.dateStyle = .MediumStyle
         self.datePicker.text = timeFormatter.stringFromDate(sender.date)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .NoStyle
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        print(sender.date)
+        self.dateString = dateFormatter.stringFromDate(sender.date)
     }
     
     func handleTimePicker(sender: UIDatePicker) {
         let timeFormatter = NSDateFormatter()
         timeFormatter.timeStyle = .MediumStyle
         self.timePicker.text = timeFormatter.stringFromDate(sender.date)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "hh:mm:ss"
+        self.timeString = dateFormatter.stringFromDate(sender.date)
     }
     
     func add() {
-        let urlPath = "http://127.0.0.1:8000/ride"
+        let urlPath = "http://127.0.0.1:8000/rides"
         let url = NSURL(string: urlPath)!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
@@ -117,29 +136,28 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
             let json: AnyObject
             do {
                 json =  try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-                print(json)
             } catch {
                 // Could not parse the JSON
             }
         }
         
         task.resume()
-
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func getPOSTData() -> Dictionary<String, AnyObject> {
         var params = Dictionary<String, AnyObject>()
-        params["created_by"] = "1"
-        params["date"] = "2015-01-01"
+        params["passengers"] = [1]
         params["departure"] = [
-            "place_id" : "123123",
-            "name" : "shorts bay"
+            "place_id" : self.departure.place_id,
+            "name" : self.departure.name
         ]
         params["destination"] = [
-            "place_id" : "12312",
-            "name" : "asdf bay"
+            "place_id" : self.destination.place_id,
+            "name" : self.destination.name
         ]
-        params["time"] = "12:50:12"
+        params["time"] = self.timeString
+        params["date"] = self.dateString
         return params
     }
     
@@ -152,8 +170,14 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
     func isDismissingWithResult(controller: RideLocalSearchViewController, result: PointOfInterest) {
         if let textField = controller.textField {
             textField.text = result.name
-            self.destinationPlaceId = result.place_id
-            self.departurePlaceId = result.place_id
+            if (textField.placeholder?.rangeOfString("Departure") != nil) {
+                self.departure.place_id = result.place_id
+                self.departure.name = result.name
+            }
+            else {
+                self.destination.place_id = result.place_id
+                self.destination.name = result.name
+            }
         }
     }
 }

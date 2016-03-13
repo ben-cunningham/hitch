@@ -9,6 +9,18 @@
 import UIKit
 
 class Ride: NSObject {
-//    var User: User
-//    var
+    var passengers: [Person]
+    var destinationLocation: PointOfInterest
+    var departureLocation: PointOfInterest
+    var date: String
+    var time: String
+    
+    init(destination: PointOfInterest, departure: PointOfInterest, date: String, time: String) {
+        self.passengers = [Person]()
+        self.destinationLocation = destination
+        self.departureLocation = departure
+        self.date = date
+        self.time = time
+        super.init()
+    }
 }

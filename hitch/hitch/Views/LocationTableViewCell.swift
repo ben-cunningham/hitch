@@ -9,13 +9,30 @@
 import UIKit
 
 class LocationTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    lazy var departureLabel: UILabel = {
+        return UILabel()
+        
+    }()
+    
+    lazy var dateLabel: UILabel = {
+        return UILabel()
+    }()
+    
+    init(departureDestination: String, date: String) {
+        super.init(style: .Default, reuseIdentifier: nil)
+        self.departureLabel.text = departureDestination
+        self.dateLabel.text = date
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-
+    
+    override func layoutSubviews() {
+        self.departureLabel.frame = CGRectMake(20, 0, self.bounds.maxX, 40)
+        self.addSubview(self.departureLabel)
+        
+        self.dateLabel.frame = CGRectMake(20, 20, self.bounds.maxX, 50)
+        self.addSubview(self.dateLabel)
+    }
 }

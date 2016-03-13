@@ -42,7 +42,7 @@ class RideLocalSearchViewController: UITableViewController, LocalSearchResultsDe
     
     // MARK: LocalSearchResultsDelegate
     
-    func isDismissingWithResult(result: PointOfInterest) {
+    func isDismissingWithResult(searchResultsController: LocalSearchResults, result: PointOfInterest) {
         self.delegate?.isDismissingWithResult(self, result: result)
         self.navigationController?.popViewControllerAnimated(true)
     }

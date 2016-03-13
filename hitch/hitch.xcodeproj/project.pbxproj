@@ -17,6 +17,8 @@
 		D309BEDD1C94D9D4004AC853 /* LocalSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309BEDC1C94D9D4004AC853 /* LocalSearchResults.swift */; };
 		D309BEDF1C94FACC004AC853 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309BEDE1C94FACC004AC853 /* LocationTableViewCell.swift */; };
 		D309BEE11C953975004AC853 /* RideLocalSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309BEE01C953975004AC853 /* RideLocalSearchViewController.swift */; };
+		D309BEE51C957A56004AC853 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309BEE41C957A56004AC853 /* Person.swift */; };
+		D309BEE71C95B1BB004AC853 /* RideDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309BEE61C95B1BB004AC853 /* RideDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		D309BEDC1C94D9D4004AC853 /* LocalSearchResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalSearchResults.swift; path = Controllers/LocalSearchResults.swift; sourceTree = "<group>"; };
 		D309BEDE1C94FACC004AC853 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationTableViewCell.swift; path = Views/LocationTableViewCell.swift; sourceTree = "<group>"; };
 		D309BEE01C953975004AC853 /* RideLocalSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RideLocalSearchViewController.swift; path = Controllers/RideLocalSearchViewController.swift; sourceTree = "<group>"; };
+		D309BEE41C957A56004AC853 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Person.swift; path = Models/Person.swift; sourceTree = "<group>"; };
+		D309BEE61C95B1BB004AC853 /* RideDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RideDetailViewController.swift; path = Controllers/RideDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				D309BEB51C94AA88004AC853 /* AppDelegate.swift */,
+				D309BEDE1C94FACC004AC853 /* LocationTableViewCell.swift */,
 				D309BEDB1C94CF58004AC853 /* Models */,
 				D309BECD1C94B2F6004AC853 /* Controllers */,
 				D309BEBC1C94AA88004AC853 /* Assets.xcassets */,
@@ -77,6 +82,7 @@
 		D309BECD1C94B2F6004AC853 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D309BEE61C95B1BB004AC853 /* RideDetailViewController.swift */,
 				D309BEC71C94AB77004AC853 /* TableViewController.swift */,
 				D309BEDC1C94D9D4004AC853 /* LocalSearchResults.swift */,
 				D309BEE01C953975004AC853 /* RideLocalSearchViewController.swift */,
@@ -90,7 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				D309BED91C94CF4C004AC853 /* Ride.swift */,
-				D309BEDE1C94FACC004AC853 /* LocationTableViewCell.swift */,
+				D309BEE41C957A56004AC853 /* Person.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -168,9 +174,11 @@
 				D309BEB61C94AA88004AC853 /* AppDelegate.swift in Sources */,
 				D309BEDF1C94FACC004AC853 /* LocationTableViewCell.swift in Sources */,
 				D309BEE11C953975004AC853 /* RideLocalSearchViewController.swift in Sources */,
+				D309BEE71C95B1BB004AC853 /* RideDetailViewController.swift in Sources */,
 				D309BECF1C94B333004AC853 /* NavigationController.swift in Sources */,
 				D309BEDD1C94D9D4004AC853 /* LocalSearchResults.swift in Sources */,
 				D309BECA1C94B04F004AC853 /* NewRideViewController.swift in Sources */,
+				D309BEE51C957A56004AC853 /* Person.swift in Sources */,
 				D309BEDA1C94CF4C004AC853 /* Ride.swift in Sources */,
 				D309BEC81C94AB77004AC853 /* TableViewController.swift in Sources */,
 			);
