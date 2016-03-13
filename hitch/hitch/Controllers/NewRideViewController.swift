@@ -12,6 +12,7 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
     var departureField: UITextField
     var destinationField: UITextField
     var datePicker: UITextField
+    var timePicker: UITextField
     
     var destinationPlaceId: String = ""
     var departurePlaceId: String = ""
@@ -20,6 +21,7 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
         self.departureField = UITextField()
         self.destinationField = UITextField()
         self.datePicker = UITextField()
+        self.timePicker = UITextField()
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,7 +53,14 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
         self.datePicker.backgroundColor = UIColor.whiteColor()
         self.datePicker.frame = CGRectMake(0, 200, self.view.bounds.maxY, 50)
         self.datePicker.placeholder = "Date"
+        self.datePicker.addTarget(self, action: Selector("showDatePicker:"), forControlEvents: .TouchDown)
         self.view.addSubview(self.datePicker)
+        
+        self.timePicker.backgroundColor = UIColor.whiteColor()
+        self.timePicker.frame = CGRectMake(0, 250, self.view.bounds.maxY, 50)
+        self.timePicker.placeholder = "Departure Time"
+        self.timePicker.addTarget(self, action: Selector("showTimePicker:"), forControlEvents: .TouchDown)
+        self.view.addSubview(self.timePicker)
         
         super.viewDidLoad()
     }
@@ -61,6 +70,32 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
         controller.delegate = self
         controller.textField = sender
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func showDatePicker(sender: UITextField) {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = UIDatePickerMode.Date
+        sender.inputView = datePicker
+        datePicker.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    func showTimePicker(sender: UITextField) {
+        let timePicker = UIDatePicker()
+        timePicker.datePickerMode = UIDatePickerMode.Time
+        sender.inputView = timePicker
+        timePicker.addTarget(self, action: Selector("handleTimePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    func handleDatePicker(sender: UIDatePicker) {
+        let timeFormatter = NSDateFormatter()
+        timeFormatter.dateStyle = .MediumStyle
+        self.datePicker.text = timeFormatter.stringFromDate(sender.date)
+    }
+    
+    func handleTimePicker(sender: UIDatePicker) {
+        let timeFormatter = NSDateFormatter()
+        timeFormatter.timeStyle = .MediumStyle
+        self.timePicker.text = timeFormatter.stringFromDate(sender.date)
     }
     
     func add() {
