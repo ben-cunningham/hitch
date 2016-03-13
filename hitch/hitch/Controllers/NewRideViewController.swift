@@ -125,7 +125,7 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
     }
     
     func add() {
-        let urlPath = "http://127.0.0.1:8000/rides"
+        let urlPath = "http://127.0.0.1:8000/rides/"
         let url = NSURL(string: urlPath)!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
@@ -137,6 +137,7 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
         } catch {
             fatalError("")
         }
+//        print(postDic)
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in

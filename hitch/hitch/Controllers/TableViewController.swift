@@ -73,6 +73,13 @@ class TableViewController: UITableViewController, LocalSearchResultsDelegate {
     }
     
     func rideForDictionary(result: NSDictionary) {
+        let passengers = result["passengers"] as! Array<Int>
+        let passenger = passengers.first
+//        if (passenger != nil) {
+//            self.getPerson(passenger!, completion: { (json: NSDictionary) -> Void in
+//                person_json = json
+//            })
+//        }
         let desinationDic = result["destination"] as! Dictionary<String, String>
         let departureDic = result["departure"] as! Dictionary<String, String>
         let destination = PointOfInterest(name: desinationDic["name"]!, street: "", city: "", place_id: "")
@@ -81,6 +88,27 @@ class TableViewController: UITableViewController, LocalSearchResultsDelegate {
         let time = result["time"] as! String
         let ride = Ride(destination: destination, departure: departure, date: date, time: time)
         self.rides.append(ride)
+    }
+    
+    func getPerson(person: Int, completion: (json: NSDictionary) -> Void) {
+        var urlPath = "http://127.0.0.1:8000/persons/"
+        urlPath += String(person)
+
+        let url = NSURL(string: urlPath)!
+        let request = NSMutableURLRequest(URL: url)
+
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            let json: AnyObject
+            do {
+                json =  try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                print(json)
+                completion(json: json as! NSDictionary)
+            } catch {
+                // Could not parse the JSON
+            }
+        }
+        task.resume()
     }
     
     func requestForRidesWithPointOfInterest(poi: PointOfInterest) {

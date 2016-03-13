@@ -35,7 +35,7 @@ class RideDetailViewController: UIViewController {
         self.date = ""
         self.time = ""
         self.ride = ride
-        self.creator = Person(withDictionary: ["name":"bne"])
+        self.creator = Person()
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,7 +46,7 @@ class RideDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getPerson()
+        self.getProfileImage()
         
         UINavigationBar.appearance().tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.blackColor()
@@ -82,30 +82,12 @@ class RideDetailViewController: UIViewController {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    func getPerson() {
-//        var urlPath = "http://127.0.0.1:8000/persons"
-        let imageURL = NSURL(string: "http://factmag-images.s3.amazonaws.com/wp-content/uploads/2016/01/rtr_kanye_west_jc_150407_16x9_992.jpg")
-        let data = NSData(contentsOfURL: imageURL!)
-        let image = UIImage(data: data!)
-        
-        self.image = UIImageView(image: image)
-
-//        let url = NSURL(string: urlPath)!
-//        let request = NSMutableURLRequest(URL: url)
+    func getProfileImage() {
+        print(self.ride.creater.pictureURL)
+//        let data = NSData(contentsOfURL: self.ride.creater.pictureURL)
+//        let image = UIImage(data: data!)
 //        
-//        let session = NSURLSession.sharedSession()
-//        let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
-//            let json: AnyObject
-//            do {
-//                json =  try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-//                
-//                
-//            } catch {
-//                // Could not parse the JSON
-//            }
-//        }
-//        
-//        task.resume()
+//        self.image = UIImageView(image: image)
     }
     
     func reserveRide() {

@@ -15,13 +15,22 @@ class Person: NSObject {
     var email: String
     var pictureURL: NSURL
     
-    init(withDictionary dictionary: Dictionary<String, AnyObject>) {
-        self.firstName = dictionary["first_name"] != nil ? dictionary["first_name"] as! String : ""
-        self.lastName = dictionary["last_name"] != nil ? dictionary["last_name"] as! String : ""
-        self.username = dictionary["username"] != nil ? dictionary["username"] as! String : ""
-        self.email = dictionary["email"] != nil ? dictionary["email"] as! String : ""
-        self.pictureURL = dictionary["img"] != nil ? dictionary["img"] as! NSURL : NSURL(string: "")!
+    init(withDictionary dictionary: NSDictionary) {
+        self.firstName = dictionary["user"]!["first_name"] != nil ? dictionary["user"]!["first_name"] as! String : ""
+        self.lastName = dictionary["user"]!["last_name"] != nil ? dictionary["user"]!["last_name"] as! String : ""
+        self.username = dictionary["user"]!["username"] != nil ? dictionary["user"]!["username"] as! String : ""
+        self.email = dictionary["user"]!["email"] != nil ? dictionary["user"]!["email"] as! String : ""
+        self.pictureURL = dictionary["profile_pic"] != nil ? NSURL(string: dictionary["profile_pic"] as! String)! : NSURL(string: "")!
         
+        super.init()
+    }
+    
+    override init() {
+        self.firstName = ""
+        self.lastName = ""
+        self.username = ""
+        self.email = ""
+        self.pictureURL = NSURL(string: "")!
         super.init()
     }
 }
