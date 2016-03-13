@@ -15,6 +15,7 @@
 		D309BECF1C94B333004AC853 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309BECE1C94B333004AC853 /* NavigationController.swift */; };
 		D309BEDA1C94CF4C004AC853 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309BED91C94CF4C004AC853 /* Ride.swift */; };
 		D309BEDD1C94D9D4004AC853 /* LocalSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309BEDC1C94D9D4004AC853 /* LocalSearchResults.swift */; };
+		D309BEDF1C94FACC004AC853 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D309BEDE1C94FACC004AC853 /* LocationTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		D309BECE1C94B333004AC853 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationController.swift; path = Controllers/NavigationController.swift; sourceTree = "<group>"; };
 		D309BED91C94CF4C004AC853 /* Ride.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Ride.swift; path = Models/Ride.swift; sourceTree = "<group>"; };
 		D309BEDC1C94D9D4004AC853 /* LocalSearchResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalSearchResults.swift; path = Controllers/LocalSearchResults.swift; sourceTree = "<group>"; };
+		D309BEDE1C94FACC004AC853 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationTableViewCell.swift; path = Views/LocationTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				D309BED91C94CF4C004AC853 /* Ride.swift */,
+				D309BEDE1C94FACC004AC853 /* LocationTableViewCell.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D309BEB61C94AA88004AC853 /* AppDelegate.swift in Sources */,
+				D309BEDF1C94FACC004AC853 /* LocationTableViewCell.swift in Sources */,
 				D309BECF1C94B333004AC853 /* NavigationController.swift in Sources */,
 				D309BEDD1C94D9D4004AC853 /* LocalSearchResults.swift in Sources */,
 				D309BECA1C94B04F004AC853 /* NewRideViewController.swift in Sources */,

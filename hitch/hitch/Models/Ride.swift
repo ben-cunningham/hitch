@@ -9,5 +9,6 @@
 import UIKit
 
 class Ride: NSObject {
-    
+//    var User: User
+//    var
 }

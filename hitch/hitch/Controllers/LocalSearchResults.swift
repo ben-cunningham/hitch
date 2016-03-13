@@ -14,10 +14,18 @@ struct Location {
     var latitude: Double
 }
 
+struct PointOfInterest {
+    var name: String
+    var street: String
+    var city: String
+}
+
 class LocalSearchResults: UITableViewController, CLLocationManagerDelegate {
     var locationManager: CLLocationManager
-    var results: [MKMapItem] = []
+    var results: [PointOfInterest] = []
     var userLocation: Location
+    
+    var isLoading: Bool = false
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         self.locationManager = CLLocationManager()
@@ -62,9 +70,24 @@ class LocalSearchResults: UITableViewController, CLLocationManagerDelegate {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
         self.userLocation.latitude = newLocation.coordinate.latitude
         self.userLocation.longitute = newLocation.coordinate.longitude
+    }
+    
+    func pointOfInterestForPlace(place: NSDictionary) -> PointOfInterest {
+        let name = place["description"] as! String
+        let terms = place["terms"] as! NSArray
+        let streetTerm = terms[1] as! NSDictionary
+        let cityTerm = terms[2] as! NSDictionary
+        let street = streetTerm["value"] as! String
+        let city = cityTerm["value"] as! String
+        let poi = PointOfInterest(name: name, street: street, city: city)
+        return poi
     }
 }
 
@@ -89,18 +112,23 @@ extension LocalSearchResults: UISearchResultsUpdating {
         let request = NSMutableURLRequest(URL: url)
         
         let session = NSURLSession.sharedSession()
-        
+        self.isLoading = true
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+            self.results.removeAll()
             let json: AnyObject
             do {
-                json =  try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
-                print(json)
+                json =  try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                let predictions = json["predictions"] as! NSArray
+                for place in predictions {
+                    self.results.append(self.pointOfInterestForPlace(place as! NSDictionary))
+                }
             } catch {
                 // Could not parse the JSON
             }
+            self.isLoading = false
+            self.tableView.performSelectorOnMainThread(Selector("reloadData"), withObject: nil, waitUntilDone: true)
         }
         
         task.resume()
-        self.tableView.reloadData()
     }
 }
