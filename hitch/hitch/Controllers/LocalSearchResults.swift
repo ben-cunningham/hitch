@@ -62,7 +62,7 @@ class LocalSearchResults: UITableViewController, CLLocationManagerDelegate {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
         return self.results.count
     }
 
@@ -74,7 +74,6 @@ class LocalSearchResults: UITableViewController, CLLocationManagerDelegate {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.dismissViewControllerAnimated(true, completion: nil)
         if let delegate = self.delegate {
             delegate.isDismissingWithResult(self.results[indexPath.row])
         }

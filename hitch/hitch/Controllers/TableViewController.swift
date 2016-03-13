@@ -72,6 +72,7 @@ class TableViewController: UITableViewController, LocalSearchResultsDelegate {
             do {
                 json =  try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
                 
+
             } catch {
                 // Could not parse the JSON
             }
