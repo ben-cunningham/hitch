@@ -9,6 +9,6 @@ Austin( 3rd year CSC, 0 co-op(lookingforsummer), learnt django last night)
   --separate github for Heroku deploy (Ben didnt want nested repos)
 
 #Client, iOS (Swift) app with REST integration : 
-Ben (3yrd year CSC, 2 co-op, ObjC exp.)
+Ben (3yrd year CSC, 2 co-op, ObjC exp. + Little Django)
 
 
