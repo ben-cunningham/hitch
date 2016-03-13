@@ -6,4 +6,8 @@
 //  Copyright © 2016 Benjamin Cunningham. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class Ride: NSObject {
+    
+}
