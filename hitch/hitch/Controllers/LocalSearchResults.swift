@@ -87,6 +87,7 @@ class LocalSearchResults: UITableViewController, CLLocationManagerDelegate {
     func pointOfInterestForPlace(place: NSDictionary) -> PointOfInterest {
         let name = place["description"] as! String
         let place_id = place["place_id"] as! String
+        
         let terms = place["terms"] as! NSArray
         let streetTerm = terms[1] as! NSDictionary
         let cityTerm = terms[2] as! NSDictionary
@@ -114,7 +115,7 @@ extension LocalSearchResults: UISearchResultsUpdating {
         urlPath += "&radius=500"
         urlPath += "&key=AIzaSyBf3UDAX7z7kbkRsKm7tn2I_6LxfvL85Og"
         
-        print(urlPath)
+//        print(urlPath)
         
         let url = NSURL(string: urlPath)!
         let request = NSMutableURLRequest(URL: url)

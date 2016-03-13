@@ -53,24 +53,32 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
         self.departureField.frame = CGRectMake(0, 100, self.view.bounds.maxY, 50)
         self.departureField.placeholder = "Departure Location"
         self.departureField.addTarget(self, action: Selector("searchLocal:"), forControlEvents: .TouchDown)
+        self.departureField.leftViewMode = UITextFieldViewMode.Always
+        self.departureField.leftView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
         self.view.addSubview(self.departureField)
 
         self.destinationField.backgroundColor = UIColor.whiteColor()
         self.destinationField.frame = CGRectMake(0, 150, self.view.bounds.maxY, 50)
         self.destinationField.placeholder = "Destination"
         self.destinationField.addTarget(self, action: Selector("searchLocal:"), forControlEvents: .TouchDown)
+        self.destinationField.leftViewMode = UITextFieldViewMode.Always
+        self.destinationField.leftView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
         self.view.addSubview(self.destinationField)
 
         self.datePicker.backgroundColor = UIColor.whiteColor()
         self.datePicker.frame = CGRectMake(0, 200, self.view.bounds.maxY, 50)
         self.datePicker.placeholder = "Date"
         self.datePicker.addTarget(self, action: Selector("showDatePicker:"), forControlEvents: .TouchDown)
+        self.datePicker.leftViewMode = UITextFieldViewMode.Always
+        self.datePicker.leftView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
         self.view.addSubview(self.datePicker)
         
         self.timePicker.backgroundColor = UIColor.whiteColor()
         self.timePicker.frame = CGRectMake(0, 250, self.view.bounds.maxY, 50)
         self.timePicker.placeholder = "Departure Time"
         self.timePicker.addTarget(self, action: Selector("showTimePicker:"), forControlEvents: .TouchDown)
+        self.timePicker.leftViewMode = UITextFieldViewMode.Always
+        self.timePicker.leftView = UIView(frame:CGRect(x:0, y:0, width:10, height:10))
         self.view.addSubview(self.timePicker)
         
         super.viewDidLoad()
@@ -104,7 +112,6 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = .NoStyle
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        print(sender.date)
         self.dateString = dateFormatter.stringFromDate(sender.date)
     }
     
@@ -170,6 +177,7 @@ class NewRideViewController: UIViewController, RideLocalSearchViewControllerDele
     func isDismissingWithResult(controller: RideLocalSearchViewController, result: PointOfInterest) {
         if let textField = controller.textField {
             textField.text = result.name
+            print(result)
             if (textField.placeholder?.rangeOfString("Departure") != nil) {
                 self.departure.place_id = result.place_id
                 self.departure.name = result.name

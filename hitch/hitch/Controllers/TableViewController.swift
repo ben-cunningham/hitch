@@ -36,6 +36,8 @@ class TableViewController: UITableViewController, LocalSearchResultsDelegate {
         self.searchController.searchResultsController?.view.hidden = false
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 237.0/255, green: 247.0/255, blue: 119.0/255, alpha: 1)
+        
+        self.requestForRidesWithPointOfInterest(PointOfInterest(name: "",street: "",city: "",place_id: ""))
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -83,12 +85,11 @@ class TableViewController: UITableViewController, LocalSearchResultsDelegate {
     
     func requestForRidesWithPointOfInterest(poi: PointOfInterest) {
         let text = searchController.searchBar.text
-        if text!.characters.count == 0 {
+        if text!.characters.count == 0 && poi.name.characters.count > 0 {
             return
         }
         var urlPath = "http://127.0.0.1:8000/rides?place_id="
         urlPath += poi.place_id
-//        urlPath += "ChIJ2bWxc"
         let url = NSURL(string: urlPath)!
         let request = NSMutableURLRequest(URL: url)
         
